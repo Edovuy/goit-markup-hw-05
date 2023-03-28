@@ -12,6 +12,7 @@
   --cloud: #f4f4fd;
   --buttons-2page: #e7e9fc;
   --primary-text-color: #434455;
+  --timing-cubic: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* списки и точки */
 ul {
@@ -37,7 +38,6 @@ p {
 
 body {
   font-family: "Roboto", sans-serif;
-
   color: var(--primary-text-color);
   background-color: var(--background);
   letter-spacing: 0.02em;
@@ -107,6 +107,16 @@ img {
   letter-spacing: 0.02em;
   display: block;
   padding: 24px auto;
+  position: relative;
+}
+
+.underline::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #404BBF;
+  border-radius: 2px;
 }
 
 .header-address {
@@ -164,6 +174,7 @@ img {
   padding: 16px 32px;
   gap: 10px;
   border: 0px solid transparent;
+  transition: color var(--timing-cubic), background-color var(--timing-cubic);
 }
 
 .active-btn:hover,
@@ -251,7 +262,9 @@ img {
 
 .team-item {
   flex-basis: calc((100% - 72px) / 4);
-  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 
+              0px 1px 1px rgba(46, 47, 66, 0.16), 
+              0px 2px 1px rgba(46, 47, 66, 0.08);
   border-radius: 0px 0px 4px 4px;
   background: #FFFFFF;
   max-width: 264px;
@@ -300,6 +313,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color var(--timing-cubic);
 }
 
 .team-soc-link:hover {
@@ -320,6 +334,7 @@ img {
   width: 168px;
   height: 88px;
   fill: var(--border);
+  transition: fill var(--timing-cubic), border var(--timing-cubic);
 }
 
 .customers-item:hover,
@@ -343,10 +358,14 @@ img {
   border-radius: 4px;
   border: 0px solid transparent;
   padding: 12px 24px;
+  transition: box-shadow var(--timing-cubic);
 }
 
-.second-nav:hover {
-  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+.second-nav:hover,
+.second-nav:focus {
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 
+              0px 2px 1px rgba(0, 0, 0, 0.08), 
+              0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
 .secondary-title-cards {
@@ -421,6 +440,7 @@ img {
   height: 40px;
   border-radius: 50%;
   background-color: #4D5AE5;
+  transition: background-color var(--timing-cubic), padding var(--timing-cubic);
 }
 
 .footer-social-box:hover,
@@ -437,10 +457,37 @@ img {
 .services-list-item {
   flex-basis: calc((100% - 48px ) / 3);
   border: 1px solid #E7E9FC;
+  transition: box-shadow var(--timing-cubic);
 }
 
-.services-list-item:hover {
+.services-list-item:hover,
+.services-list-item:focus {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.service-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate(0, 100%);
+  transition: transform var(--timing-cubic);
+ /* overflow: auto; */
+  color: #F4F4FD;
+  background: #4D5AE5;
+  mix-blend-mode: normal;
+  padding: 40px 32px 164px;
+}
+
+.overlay-img:hover .overlay,
+.overlay-img:focus .overlay {
+  transform: translate(0, 0);
 }
 
 .cards-text {
@@ -464,4 +511,65 @@ img {
 .button-for-nav {
   padding-top: 96px;
   padding-bottom: 120px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity var(--timing-cubic), visibility var(--timing-cubic);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 408px;
+  height: 576px;
+  background-color: #FCFCFC;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-btn {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background: #E7E9FC;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color var(--timing-cubic), border-color var(--timing-cubic);
+}
+
+.modal-btn:hover,
+.modal-btn:focus {
+  background-color: var(--hover-color);
+  border-color: transparent;
+}
+
+.modal-btn-icon {
+  transition: fill var(--timing-cubic);
+}
+
+.modal-btn:hover .modal-btn-icon,
+.modal-btn:hover .modal-btn-icon {
+  fill: var(--background);
 }

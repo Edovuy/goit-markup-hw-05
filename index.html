@@ -20,7 +20,7 @@
         <a class="header-logo link" href="./index.html">Web<span class="header-logo-second link">Studio</span></a>
         <ul class="header-nav list link flex-box">
           <li>
-            <a class="menu-item active list link" href="./index.html">Studio</a>
+            <a class="menu-item underline active list link" href="./index.html">Studio</a>
           </li>
           <li>
             <a class="menu-item active list link" href="./portfolio.html">Portfolio</a>
@@ -46,7 +46,7 @@
       <section class="service section">
         <div class="container">
           <h1 class="service-text">Effective Solutions for Your Business</h1>
-          <button class="service-bnt active-btn" type="button">Order Service</button>
+          <button class="service-bnt active-btn" type="button" data-modal-open>Order Service</button>
         </div>
       </section>
       <section class="specifics section">
@@ -369,5 +369,15 @@
         </div>
      </div>
     </footer>
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <button class="modal-btn" type="button" data-modal-close>
+          <svg width="8" height="8" class="modal-btn-icon">
+            <use href="./images/icons.svg#icon-closemodal"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
